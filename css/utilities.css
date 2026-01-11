@@ -1,0 +1,50 @@
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.d-flex { display: flex; }
+.d-block { display: block; }
+.d-none { display: none; }
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.align-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.flex-1 { flex: 1; }
+.m-0 { margin: 0; }
+.mt-sm { margin-top: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.p-md { padding: var(--space-md); }
+.px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.rounded { border-radius: var(--radius-md); }
+.rounded-full { border-radius: var(--radius-full); }
+.bg-glass { background: var(--glass-bg); }
+.border-glass { border: 1px solid var(--glass-border); }
+.text-primary { color: var(--text-primary); }
+.text-secondary { color: var(--text-secondary); }
+.text-muted { color: var(--text-muted); }
+.font-bold { font-weight: var(--weight-bold); }
+.font-semibold { font-weight: var(--weight-semibold); }
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.position-relative { position: relative; }
+.position-absolute { position: absolute; }
+.position-fixed { position: fixed; }
+.z-10 { z-index: 10; }
+.z-100 { z-index: 100; }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.cursor-pointer { cursor: pointer; }
+.user-select-none { user-select: none; }
+.grid { display: grid; }
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+.animate-fade-in { animation: fadeInUp 0.5s ease-out; }
+.animate-scale-in { animation: scaleIn 0.3s ease-out; }
+.focus-visible { outline: 2px solid var(--accent-cyan); outline-offset: 2px; }
+@media (max-width: 639px) {
+    .d-flex-mobile { display: flex; }
+    .flex-column-mobile { flex-direction: column; }
+}
