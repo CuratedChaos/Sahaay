@@ -1,0 +1,53 @@
+:root {
+    /* Colors */
+    --bg-base: #0f172a;
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg-hover: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-border-hover: rgba(255, 255, 255, 0.2);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-disabled: rgba(255, 255, 255, 0.3);
+    --accent-purple: #a855f7;
+    --accent-cyan: #22d3ee;
+    --accent-pink: #ec4899;
+    --accent-green: #22c55e;
+    --accent-yellow: #eab308;
+    --accent-red: #ef4444;
+    --gradient-purple-cyan: linear-gradient(to right, #a855f7, #22d3ee);
+    --gradient-purple-pink: linear-gradient(to right, #a855f7, #ec4899);
+    --gradient-cyan-blue: linear-gradient(to right, #22d3ee, #3b82f6);
+    --gradient-green-emerald: linear-gradient(to right, #22c55e, #10b981);
+    --gradient-orange-red: linear-gradient(to right, #f97316, #ef4444);
+    /* Typography */
+    --font-hero: 4rem;
+    --font-page: 2rem;
+    --font-section: 1.5rem;
+    --font-subsection: 1.25rem;
+    --font-body: 1rem;
+    --font-small: 0.875rem;
+    --font-tiny: 0.75rem;
+    --weight-bold: 700;
+    --weight-semibold: 600;
+    --weight-normal: 400;
+    --line-height: 1.6;
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+    /* Transitions */
+    --transition: all 0.3s ease;
+}
