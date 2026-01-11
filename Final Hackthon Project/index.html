@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>Sahaay - Universal Classroom</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/typography.css">
+  <link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/layouts.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <style>
+    body {
+      background: radial-gradient(circle at top, #1b1f4b, #050617);
+      color: white;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    body.light-mode {
+      background: #f5f7ff;
+      color: #0b0f2b;
+    }
+    body.light-mode .navbar {
+      background: #ffffffcc;
+      backdrop-filter: blur(10px);
+    }
+    body.light-mode .card {
+      background: #ffffff;
+      color: #0b0f2b;
+    }
+    .theme-toggle { cursor: pointer; }
+    .theme-toggle:active { transform: scale(0.95); }
+  </style>
+</head>
+<body>
+  <div class="lamp-container">
+    <div class="lamp">
+      <div class="lamp-shade"></div>
+      <div class="lamp-head"></div>
+      <div class="lamp-body"></div>
+      <div class="lamp-base"></div>
+    </div>
+    <div class="cord-track">
+      <div class="cord" id="cord"></div>
+      <div class="cord-ball" id="cordBall"></div>
+    </div>
+  </div>
+
+  <nav class="top-nav">
+    <div class="nav-left">
+      <img src="Sahaay Logo.png" width="40" alt="Sahaay Logo">
+      <span class="brand">Sahaay</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="teacher.html">Teacher</a></li>
+      <li><a href="student.html">Student</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <header class="hero" role="banner">
+    <a href="index.html" class="logo-link">
+      <div class="hero-title">
+        <img src="Sahaay Logo.png" width="100" alt="Sahaay logo">
+        <h1 class="hero-heading">Sahaay</h1>
+      </div>
+    </a>
+    <p class="hero-subtitle">Accessible, real-time learning for everyone.</p>
+
+    <section class="action-cards" aria-labelledby="action-heading">
+      <h2 id="action-heading" class="sr-only">Get Started</h2>
+      <div class="glass-card action-card" onclick="window.location.href='teacher.html'">
+        <h3>I'm a Teacher</h3>
+        <p>Create and manage live sessions.</p>
+        <button class="btn-gradient">Get Started</button>
+      </div>
+      <div class="glass-card action-card">
+        <h3>I'm a Student</h3>
+        <input id="student-code" type="text" placeholder="Enter session code">
+        <button class="btn-gradient" onclick="joinAsStudent()">Join</button>
+      </div>
+    </section>
+  </header>
+
+  <main id="main" class="container">
+    <section class="features" id="features">
+      <div class="glass-card feature-card">
+        <div class="feature-icon" style="background: linear-gradient(to right, #a855f7, #22d3ee);">🎤</div>
+        <h3>Transcription</h3>
+        <p>Real-time speech-to-text for accessibility.</p>
+      </div>
+      <div class="glass-card feature-card">
+        <div class="feature-icon" style="background: linear-gradient(to right, #a855f7, #ec4899);">🤖</div>
+        <h3>AI Summaries</h3>
+        <p>Generate instant summaries with Gemini AI.</p>
+      </div>
+      <div class="glass-card feature-card">
+        <div class="feature-icon" style="background: linear-gradient(to right, #22d3ee, #3b82f6);">👍</div>
+        <h3>Reactions</h3>
+        <p>Send feedback instantly to the teacher.</p>
+      </div>
+      <div class="glass-card feature-card">
+        <div class="feature-icon" style="background: linear-gradient(to right, #22c55e, #10b981);">🛡️</div>
+        <h3>Focus Shield</h3>
+        <p>Minimize distractions with white noise.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/interactions.js"></script>
+  <script>
+    const ball = document.getElementById("cordBall");
+    const cord = document.getElementById("cord");
+    let isDragging = false, startY = 0, currentPull = 0, maxPull = 70, triggered = false;
+
+    if (localStorage.getItem("theme") === "light") document.body.classList.add("light-mode");
+
+    const startPull = (e) => {
+      isDragging = true;
+      startY = (e.touches ? e.touches[0].clientY : e.clientY);
+      document.addEventListener("mousemove", pulling);
+      document.addEventListener("touchmove", pulling);
+      document.addEventListener("mouseup", releasePull);
+      document.addEventListener("touchend", releasePull);
+    };
+
+    const pulling = (e) => {
+      if (!isDragging) return;
+      let y = (e.touches ? e.touches[0].clientY : e.clientY);
+      currentPull = Math.min(Math.max(y - startY, 0), maxPull);
+      ball.style.transform = `translateY(${currentPull}px)`;
+      cord.style.height = `${100 + currentPull}px`;
+      if (currentPull > 55 && !triggered) {
+        toggleTheme();
+        triggered = true;
+      }
+    };
+
+    const releasePull = () => {
+      isDragging = false;
+      triggered = false;
+      ball.style.transition = cord.style.transition = "0.4s cubic-bezier(.17,.67,.41,1.4)";
+      ball.style.transform = `translateY(0px)`;
+      cord.style.height = `100px`;
+      setTimeout(() => { ball.style.transition = cord.style.transition = ""; }, 400);
+      document.removeEventListener("mousemove", pulling);
+      document.removeEventListener("touchmove", pulling);
+    };
+
+    const toggleTheme = () => {
+      document.body.classList.toggle("light-mode");
+      localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+    };
+
+    ball.addEventListener("mousedown", startPull);
+    ball.addEventListener("touchstart", startPull);
+  </script>
+</body>
+</html>
