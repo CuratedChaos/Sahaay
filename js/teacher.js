@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     summaryBtn.addEventListener("click", async () => {
-        if (transcriptData.length < 3) return;
+        if (transcriptData.length === 0) return;
         summaryOutput.innerHTML = "⏳ Generating...";
 
         const summary = await generateGeminiSummary(transcriptData.join(" "));
@@ -94,4 +94,5 @@ document.addEventListener("DOMContentLoaded", () => {
         r.onend = () => { if (isMicOn) r.start(); };
         return r;
     }
+
 });
